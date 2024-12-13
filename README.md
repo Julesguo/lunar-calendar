@@ -2,7 +2,7 @@
 
 基于 van-picker+calendar 实现的公历和农历日历切换，有 vue 版本和小程序版本，封装成组件直接调用即可
 
-开箱即用
+开箱即用，觉得好用记得点星星哦
 
 vue 项目贴图
 ![公历](https://github.com/Julesguo/lunar-calendar/blob/main/images/%E5%85%AC%E5%8E%86.png)
