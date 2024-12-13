@@ -1,0 +1,12 @@
+{
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "backgroundColor": "#f8f8f8",
+  "backgroundColorTop": "#00000",
+  "backgroundColorBottom": "#f8f8f8",
+  "usingComponents": {
+    "lunar-datetime-picker": "./components/calendar/lunar-time-picker/lunar-time-picker"
+  },
+  "enablePullDownRefresh": false,
+  "disableScroll": true
+}

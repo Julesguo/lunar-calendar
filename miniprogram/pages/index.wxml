@@ -1,0 +1,28 @@
+<view class="main-container">
+  <!-- 出生时间 -->
+          <van-cell
+            class="van-cell-item"
+            title="出生时间"
+            title-width="160rpx"
+            is-link
+            value="{{ birthDateValue }}"
+            bind:click="onshowBirthDatePicker"
+          />
+          <van-popup
+            show="{{ isBirthDatePickerVisible }}"
+            bind:close="onCloseBirthDatePicker"
+            position="bottom"
+            round
+          >
+            <view class="date-picker-title">
+              <text class="cancle-text" bind:tap="onCloseBirthDatePicker"></text>
+              <view class="time">出生时间</view>
+              <text class="confirm-text" bind:tap="onConfirmBirthDatePicker">确定</text>
+            </view>
+            <lunar-datetime-picker
+              wx:if="{{isBirthDatePickerVisible}}"
+              bind:updateLunarTime="onUpdateLunarTime"
+              selectDateTime="{{birthDate}}"
+            ></lunar-datetime-picker>
+          </van-popup>
+</view>

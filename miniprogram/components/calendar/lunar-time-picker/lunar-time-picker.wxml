@@ -1,0 +1,57 @@
+<view class="lunar-date-picker">
+  <view class="pickerTab">
+    <view class="pick-tabs">
+      <view
+        class="pick-tab {{titleActive==0?'active':''}}"
+        data-type="solar"
+        bind:tap="onChangeTab"
+        >公历</view
+      >
+      <view
+        class="pick-tab {{titleActive==1?'active':''}}"
+        data-type="lunar"
+        bind:tap="onChangeTab"
+        >农历</view
+      >
+    </view>
+  </view>
+  <!-- <view>pickerDate:{{pickerSelectDate}} {{pickerSelectTime}}</view> -->
+  <!-- indicator-style="height: 44px;background: #f4f4f5;" -->
+  <!-- 是否为阴历：{{pickerIsLunar}} -->
+  <picker-view
+    class="pickerView {{pickerIsLunar?'LunarPickerView':''}}"
+    indicator-class="picker-select-item"
+    indicator-style="font-weight: 600;"
+    style="width: 100%; height: 400rpx"
+    value="{{pickerSelectIndexArr}}"
+    bindchange="onChange"
+    bindpickstart="onChangeStart"
+    bindpickend="onChangeEnd"
+  >
+    <picker-view-column class="pickerColumn0">
+      <view wx:for="{{pickerYearArr}}" wx:key="index" class="pickerColumn"
+        >{{item.label}}</view
+      >
+    </picker-view-column>
+    <picker-view-column class="pickerColumn1">
+      <view wx:for="{{pickerMonthArr}}" wx:key="index" class="pickerColumn"
+        >{{item.label}}</view
+      >
+    </picker-view-column>
+    <picker-view-column class="pickerColumn2">
+      <view wx:for="{{pickerDayArr}}" wx:key="index" class="pickerColumn"
+        >{{item.label}}</view
+      >
+    </picker-view-column>
+    <picker-view-column class="pickerColumn3">
+      <view class="pickerColumn" wx:for="{{timeRange[0]}}" wx:key="index">
+        {{item.label}} 时</view
+      >
+    </picker-view-column>
+    <picker-view-column class="pickerColumn4">
+      <view class="pickerColumn" wx:for="{{timeRange[1]}}" wx:key="index">
+        {{item.label}} 分</view
+      >
+    </picker-view-column>
+  </picker-view>
+</view>

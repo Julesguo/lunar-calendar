@@ -1,0 +1,39 @@
+page {
+  background-color: #f7f8fc;
+}
+.main-content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+// 时间popup
+.date-picker-title {
+  height: 88rpx;
+  margin: 0 32rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .cancle-text {
+    color: #969799;
+    font-size: 28rpx;
+    display: inline-block;
+    width: 60rpx;
+    text-align: left;
+  }
+  .confirm-text {
+    color: #50d491;
+    font-size: 28rpx;
+    width: 60rpx;
+    text-align: right;
+  }
+  .time {
+    font-weight: 500;
+    font-size: 30rpx;
+    color: #999999;
+  }
+}
+
+
