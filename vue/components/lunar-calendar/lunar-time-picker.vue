@@ -6,6 +6,8 @@
       @confirm="onConfirm"
       @cancel="onCancel"
       :title="title"
+      :show-toolbar="showToolbar"
+      :class="extClass"
     >
       <van-picker
         :columns="pickerColumns"
@@ -55,6 +57,14 @@ const props = defineProps({
     type: String,
     default: '选择时间',
   },
+  showToolbar: {
+    type: Boolean,
+    default: true,
+  },
+  extClass: {
+    type: String,
+    default: '',
+  },
   // 最小时间（公历），支持 1901/01/01 | 1901-01-01 | 1901年01月01日
   minTime: {
     type: String,
@@ -83,7 +93,7 @@ const pickerSelectValueArr = ref<Array<number>>([]); // 选中的数值数组
 const pickerSelectDate = ref(''); // 记录选择的时间(公历)，格式：1900/01/01
 const pickerSelectTime = ref(''); // 记录选择的时间(公历)，格式：12:00
 const pickerIsLunar = ref(props.isLunar); // true为农历，false为公历
-const titleActive = ref(0); // 0为阳历  1为阴历
+const titleActive = ref(props.isLunar ? 1 : 0); // 0为阳历  1为阴历
 const pickerColumns = ref<Array<Array<PickerColumn>>>([[], [], [], [], []]); // picker组件的columns
 
 onMounted(() => {
@@ -182,7 +192,7 @@ const setDateTime = (timeObj: {
   // 获取年月日的值
   let yearValue = yearArr[yearIndex].value;
   let monthValue = monthArr[monthIndex].value;
-  let dayValue = dayArr[monthIndex].value;
+  let dayValue = dayArr[dayIndex].value;
   let hourValue = timeObj.hours;
   let minuteValue = timeObj.minutes;
 
@@ -335,7 +345,8 @@ const setDateLunarTime = (timeObj: {
 }) => {
   // 判断是否是闰月
   let isLeapMonth =
-    timeObj.isLeapMonth && calendar.leapMonth(timeObj.year) == timeObj.month;
+    timeObj.isLeapMonth &&
+    calendar.leapMonth(timeObj.year) == parseInt(timeObj.month);
   // 农历时间转农历对象
   let lunarTimeObj = calendar.lunar2solar(
     timeObj.year,
@@ -408,7 +419,7 @@ const setDateLunarTime = (timeObj: {
   // 更新记录的选中时间
   let selectLunarTimeObj = calendar.lunar2solar(
     yearArr[yearIndex].value,
-    monthArr[monthIndex].value,
+    parseInt(monthArr[monthIndex].value),
     dayArr[dayIndex].value,
     isLeapMonth,
   );
@@ -470,7 +481,7 @@ const getLunarMonths = (year: number): PickerColumn[] => {
   if (leapMonth > 0 && leapMonth >= minMonth && leapMonth <= maxMonth) {
     tempArr.splice(leapMonth, 0, {
       text: '闰' + calendar.toChinaMonth(leapMonth),
-      value: leapMonth,
+      value: leapMonth + 'l',
       isLeapMonth: true,
     });
   }
@@ -601,7 +612,11 @@ const onConfirm = () => {
     timeObject: lunarTimeObj, // 公农历对象信息
     pickerIsLunar: pickerIsLunar.value,
   };
-  emit('updateLunarTime', selectedDateObj);
+  if(props.showToolbar){
+    emit('updateLunarTime', selectedDateObj);
+  } else {
+    return selectedDateObj;
+  }
 };
 
 // 点击取消
@@ -642,6 +657,13 @@ const LC_parseTimeString = (timeString: String) => {
 const LC_log = (value: string) => {
   console.log(value);
 };
+
+/**
+ * 抛出方法供直接调用
+ */
+ defineExpose({
+  onConfirm,
+});
 </script>
 
 <style lang="less" scoped>

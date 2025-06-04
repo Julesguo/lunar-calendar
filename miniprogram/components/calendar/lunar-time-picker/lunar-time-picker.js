@@ -16,6 +16,10 @@ Component({
       type: Boolean,
       value: false
     },
+    extClass: {
+      type: String,
+      default: '',
+    },
     // 最小时间（公历），支持 1901/01/01 | 1901-01-01 | 1901年01月01日
     minTime: {
       type: String,
@@ -55,7 +59,7 @@ Component({
     pickerSelectDate: '', // 记录选择的日期(公历)，格式：1900/01/01
     pickerSelectTime: '', // 记录选择的时间，格式：00:00
     pickerIsLunar: false,
-    titleActive: 0, // 0为阳历  1为阴历
+    titleActive: this.properties.isLunar ? 1 : 0, // 0为阳历  1为阴历
     isUpdateIndex: false,
     isAutoUpdateIndex: false
   },

@@ -15,9 +15,6 @@
       >
     </view>
   </view>
-  <!-- <view>pickerDate:{{pickerSelectDate}} {{pickerSelectTime}}</view> -->
-  <!-- indicator-style="height: 44px;background: #f4f4f5;" -->
-  <!-- 是否为阴历：{{pickerIsLunar}} -->
   <picker-view
     class="pickerView {{pickerIsLunar?'LunarPickerView':''}}"
     indicator-class="picker-select-item"
